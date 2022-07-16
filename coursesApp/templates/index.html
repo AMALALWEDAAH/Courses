@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, td, th {
+            border: 1px solid;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        </style>
+</head>
+<body>
+    <div class="forms">
+        <form action="/add_course" method="post">
+            <h1>Add a new course</h1>
+            {%csrf_token%}
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label for="Description">Description</label>
+                <input type="text" name="Description">
+            </div>
+            <button>Add</button>
+        </form>
+
+        <br>
+
+        <h2>Courses</h2>
+        <table>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+                
+            </tr>
+            {% for Course in Course %}
+                <tr>
+                    <td>{{Course.name}}</td>
+                    <td>{{Course.Description}}</td>
+                    <td>{{Course.created_at}}</td>
+                    <td><a href="/delete_course/{{Course.id}}">remove</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+</body>
+</html>
